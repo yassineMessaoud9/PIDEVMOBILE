@@ -37,7 +37,7 @@ import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
 import com.mycompagny.gui.BaseForm;
 import com.mycompagny.myapp.entities.Activite;
-import com.mycompagny.myapp.entities.Plat;
+import com.mycompagny.myapp.entities.Reclamation;
 import com.mycompagny.myapp.services.Service;
 import java.util.ArrayList;
 
@@ -53,11 +53,11 @@ public class AllPlat extends BaseForm {
         getTitleArea().setUIID("Container");
         setTitle("Activite");
         getContentPane().setScrollVisible(false);
-
+/*
         super.addSideMenu(res);
         tb.addSearchCommand(e -> {
         });
-
+*/
         Tabs swipe = new Tabs();
 
         Label spacer1 = new Label();
@@ -84,7 +84,14 @@ public class AllPlat extends BaseForm {
         FlowLayout flow = new FlowLayout(CENTER);
         flow.setValign(BOTTOM);
         Container radioContainer = new Container(flow);
+        Button retour = new Button("Retour");
+        retour.addActionListener(e
+                -> {
 
+            new Menu(res).show();
+
+        });
+        add(retour);
         for (int iter = 0; iter < rbs.length; iter++) {
             rbs[iter] = RadioButton.createToggle(unselectedWalkthru, bg);
             rbs[iter].setPressedIcon(selectedWalkthru);
@@ -108,16 +115,16 @@ public class AllPlat extends BaseForm {
             @Override
             public void actionPerformed(ActionEvent evt) {
 
-                new AddPlat(res, current).show();
+                new AddReclamation(res, current).show();
             }
         });
         ButtonGroup barGroup = new ButtonGroup();
         Container co = new Container(BoxLayout.xCenter());;
-        ArrayList<Plat> Plat = new ArrayList();
+        ArrayList<Reclamation> Reclamation = new ArrayList();
         Service sa = new Service();
-        Plat = sa.getAllActivites();
+        Reclamation = sa.getAllReclamation();
 
-        for (Plat fi : Plat) {
+        for (Reclamation fi : Reclamation) {
             Container ct = new Container(BoxLayout.y());
 
             //String url = "file://C:/1st projet/FirstProject/public/uploads/"+ fi.getImage();
@@ -128,26 +135,29 @@ public class AllPlat extends BaseForm {
                                 imgv = new ImageViewer();
                                 imgv.setImage(i);
                                 ct.add(imgv);*/
-            Label l = new Label("ID : " + fi.getIdPlat());
-            Label l2 = new Label("Nom : " + fi.getDescription(), "SmallLabel");
+            Label l = new Label("ID : " + fi.getIdReclamation());
+            Label l2 = new Label("titre: " + fi.getIntituleReclamation(), "SmallLabel");
+                   Label l3 = new Label("Type : " + fi.getTypeReclamation(), "SmallLabel");
+                          Label l4 = new Label("description: " + fi.getDescription(), "SmallLabel");
             /*   Label l3 = new Label("Cat Age : "+fi.getCat_age(),"SmallLabel");
                             Label l4 = new Label("Type : "+fi.getType(),"RedLabel");
                             Label l5 = new Label("ID E : "+fi.getId_enfant());*/
             l2.getAllStyles().setFgColor(0xf15f5f);
             ct.add(l);
             ct.add(l2);
-            /*  ct.add(l3);
+ 
+             ct.add(l3);
                             ct.add(l4);
-                            ct.add(l5);*/
+                           /* ct.add(l5);*/
 
             Button Modif = new Button("Modifier");
             Button Supprimer = new Button("Supprimer");
 
-            /*   Modif.addActionListener(new ActionListener() {
+              Modif.addActionListener(new ActionListener() {
                                             @Override
            public void actionPerformed(ActionEvent evt) {               
 
-                               new ModifierActivite(res,current,fi).show();                   
+                              // new ModifierActivite(res,current,fi).show();                   
                 }   
         });
                             Supprimer.addActionListener(new ActionListener() {
@@ -155,7 +165,7 @@ public class AllPlat extends BaseForm {
             public void actionPerformed(ActionEvent evt) {               
                 if (Dialog.show("Confirmation", "Voulez vous supprimer cette Activite ?", "Oui", "Annuler")) {
 
-                  if( Service.getInstance().deleteActivite(fi.getId_a()))
+                  if( Service.getInstance().deleteReclamation(fi.getIdReclamation()))
                             {
                                 Dialog.show("Success","supprimer",new Command("OK"));
                                 new AllPlat(res).show();
@@ -166,7 +176,7 @@ public class AllPlat extends BaseForm {
                 }   
         });
                        ct.add(Modif);
-                       ct.add(Supprimer);*/
+                       ct.add(Supprimer);
             Label separator = new Label("", "Separator");
             ct.add(separator);
             add(ct);

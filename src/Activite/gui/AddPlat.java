@@ -134,7 +134,7 @@ public class AddPlat extends BaseForm {
                 });
             }
         });
-*/
+         */
         Button btnValider = new Button("Valider");
         btnValider.addActionListener(new ActionListener() {
             @Override
@@ -143,7 +143,7 @@ public class AddPlat extends BaseForm {
                     Dialog.show("Alert", "Please fill all the fields", new Command("OK"));
                 } else {
                     try {
-                        Plat plat = new Plat(NomPlat.getText(), Double.parseDouble(prixplat.getText()),photoplat.getText(),description.getText());
+                        Plat plat = new Plat(NomPlat.getText(), Double.parseDouble(prixplat.getText()), photoplat.getText(), description.getText());
                         if (Service.getInstance().AddPlat(plat)) {
                             Dialog.show("Success", "Connection accepted", new Command("OK"));
                         } else {
@@ -158,10 +158,10 @@ public class AddPlat extends BaseForm {
         });
         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, (evt) -> {
             previous.showBack();
-        }); 
+        });
         addAll(NomPlat, prixplat, photoplat, description, btnValider);
     }
-/*
+    /*
     protected String saveFileToDevice(String hi, String ext) throws IOException {
         ConnectionRequest connectionRequest;
         connectionRequest = new ConnectionRequest();
